@@ -33,11 +33,8 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
     apt-get install -y ./google-chrome-stable_current_amd64.deb && \
     rm google-chrome-stable_current_amd64.deb
 
-# Install Telegram Desktop
-RUN apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:atareao/telegram && \
-    apt-get update && \
-    apt-get install -y telegram
+# Install Telegram Desktop (from official repositories, no external PPA)
+RUN apt-get install -y telegram-desktop
 
 # Allow any user to start the X server
 RUN echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
