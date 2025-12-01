@@ -24,7 +24,7 @@ chown amt:amt /home/amt/.vnc/xstartup
 chmod +x /home/amt/.vnc/xstartup
 
 # Start TigerVNC server on display :1
-su - amt -c "vncserver :1 -geometry 1920x1080 -depth 24 -localhost no"
+su - amt -c "vncserver :1 -depth 24 -localhost no"
 
 # Start noVNC web server on port 8080, proxying to the VNC server
 websockify --web=/usr/share/novnc/ 8080 localhost:5901 &
