@@ -5,7 +5,7 @@ adduser --disabled-password --gecos "" amt && \
 echo "amt:$DESKTOP_PASS" | chpasswd && \
 adduser amt sudo
 
-# Add desktop shortcuts for Google Chrome and Telegram
+# Add desktop shortcuts for Google Chrome, Telegram, Logs and File Manager
 mkdir -p /home/amt/Desktop
 
 cat >/home/amt/Desktop/chrome.desktop << 'EOF'
@@ -28,6 +28,17 @@ Exec=telegram-desktop
 Terminal=false
 Icon=telegram
 Categories=Network;InstantMessaging;
+EOF
+
+cat >/home/amt/Desktop/files.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=File Manager
+Exec=nemo
+Terminal=false
+Icon=system-file-manager
+Categories=Utility;FileManager;
 EOF
 
 chown amt:amt /home/amt/Desktop/*.desktop

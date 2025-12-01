@@ -1,18 +1,18 @@
-# Base image with Ubuntu + CUDA runtime for GPU support
-FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+# Base image with Linux Mint
+FROM linuxmintd/mint22.2-amd64
 
 # Set environment variables to avoid interactive prompts during package installation
-ENV DEBIAN_FRONTEND=noninteractive \
-    NVIDIA_VISIBLE_DEVICES=all \
-    NVIDIA_DRIVER_CAPABILITIES=all
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install necessary packages
 RUN apt-get update && apt-get install -y \
     cinnamon \
     cinnamon-core \
+    xed \
     sudo \
     wget \
     curl \
+    nano \
     dbus-x11 \
     libu2f-udev \
     libvulkan1 \
