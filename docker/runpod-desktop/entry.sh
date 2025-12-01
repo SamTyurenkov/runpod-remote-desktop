@@ -24,7 +24,7 @@ cat >/home/amt/Desktop/telegram.desktop << 'EOF'
 Version=1.0
 Type=Application
 Name=Telegram
-Exec=telegram
+Exec=telegram-desktop
 Terminal=false
 Icon=telegram
 Categories=Network;InstantMessaging;
