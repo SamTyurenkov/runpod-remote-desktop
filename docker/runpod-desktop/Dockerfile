@@ -40,7 +40,7 @@ RUN sed -i 's/^test.*$/startxfce4/' /etc/xrdp/startwm.sh
 # Allow any user to start the X server
 RUN echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
 
-RUN pip install --upgrade pip && pip install jupyter ninja
+# RUN pip install --upgrade pip && pip install jupyter ninja
 
 # Expose RDP port
 EXPOSE 3389
