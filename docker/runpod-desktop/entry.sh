@@ -5,17 +5,18 @@ adduser --disabled-password --gecos "" amt && \
 echo "amt:$DESKTOP_PASS" | chpasswd && \
 adduser amt sudo
 
-start_xrdp() {
-    echo "XRDP service started."
-    /usr/sbin/xrdp -n -f &
-}
+# Configure VNC to start XFCE for the user
+su - amt -c "mkdir -p ~/.vnc"
+su - amt -c "echo '#!/bin/sh
+xrdb $HOME/.Xresources
+startxfce4 &' > ~/.vnc/xstartup"
+su - amt -c "chmod +x ~/.vnc/xstartup"
 
-# start_jupyterlab() {
-#     echo "Starting Jupyter Lab..."
-#     jupyter lab --allow-root --no-browser --port=8888 --ip=* --FileContentsManager.delete_to_trash=False --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=*
-# }
+# Start TigerVNC server on display :1
+su - amt -c "vncserver :1 -geometry 1920x1080 -depth 24 -localhost no"
 
-start_xrdp
+# Start noVNC web server on port 8080, proxying to the VNC server
+websockify --web=/usr/share/novnc/ 8080 localhost:5901 &
 
 # Keep the container running indefinitely
 tail -f /dev/null

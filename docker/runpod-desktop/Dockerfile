@@ -8,7 +8,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     xfce4 \
     xfce4-goodies \
-    xrdp \
     sudo \
     wget \
     curl \
@@ -21,12 +20,10 @@ RUN apt-get update && apt-get install -y \
     libgtk-3-0 \
     libgbm1 \
     ca-certificates \
+    novnc \
+    websockify \
+    tigervnc-standalone-server \
     --no-install-recommends
-
-# Install CHROME REMOTE DESKTOP
-RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb && \
-    apt-get install -y ./chrome-remote-desktop_current_amd64.deb && \
-    rm chrome-remote-desktop_current_amd64.deb
 
 # Install Google Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
@@ -47,8 +44,8 @@ RUN echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
 
 # RUN pip install --upgrade pip && pip install jupyter ninja
 
-# Expose RDP port
-EXPOSE 3389
+# Expose noVNC port
+EXPOSE 8080
 
 ADD entry.sh /usr/local/bin/entrypoint.sh
 WORKDIR /
