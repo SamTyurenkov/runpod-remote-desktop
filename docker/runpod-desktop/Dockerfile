@@ -1,0 +1,46 @@
+# Base image with Ubuntu
+FROM ubuntu:22.04
+
+# Set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and install necessary packages
+RUN apt-get update && apt-get install -y \
+    xfce4 \
+    xfce4-goodies \
+    xrdp \
+    sudo \
+    wget \
+    curl \
+    dbus-x11 \
+    --no-install-recommends
+
+# Install Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
+
+# Install Telegram Desktop
+RUN apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:atareao/telegram && \
+    apt-get update && \
+    apt-get install -y telegram
+
+# Set up XRDP to use XFCE
+RUN sed -i 's/^test.*$/startxfce4/' /etc/xrdp/startwm.sh
+
+# Allow any user to start the X server
+RUN echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
+
+# Create a non-root user for remote desktop access
+RUN adduser --disabled-password --gecos "" amt && \
+    echo "amt:hello2026" | chpasswd && \
+    adduser amt sudo
+
+# Expose RDP port
+EXPOSE 3389
+
+ADD entry.sh /usr/local/bin/entrypoint.sh
+WORKDIR /
+RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
