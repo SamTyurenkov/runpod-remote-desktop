@@ -13,7 +13,7 @@ cat >/home/amt/Desktop/chrome.desktop << 'EOF'
 Version=1.0
 Type=Application
 Name=Google Chrome
-Exec=google-chrome
+Exec=google-chrome --no-sandbox --disable-dev-shm-usage
 Terminal=false
 Icon=google-chrome
 Categories=Network;WebBrowser;
