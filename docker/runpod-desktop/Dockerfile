@@ -13,6 +13,14 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     dbus-x11 \
+    libu2f-udev \
+    libvulkan1 \
+    libva-drm2 \
+    libva-x11-2 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libgbm1 \
+    ca-certificates \
     --no-install-recommends
 
 # Install Google Chrome
