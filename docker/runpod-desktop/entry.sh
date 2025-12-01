@@ -8,10 +8,20 @@ adduser amt sudo
 # Configure VNC to start XFCE for the user
 su - amt -c "mkdir -p ~/.vnc"
 su - amt -c "printf '%s\n%s\nn\n' \"$DESKTOP_PASS\" \"$DESKTOP_PASS\" | vncpasswd"
-su - amt -c "echo '#!/bin/sh
-xrdb \$HOME/.Xresources
-exec startxfce4' > ~/.vnc/xstartup"
-su - amt -c "chmod +x ~/.vnc/xstartup"
+
+cat >/home/amt/.vnc/xstartup << 'EOF'
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+if [ -x /usr/bin/startxfce4 ]; then
+  exec /usr/bin/startxfce4
+else
+  exec /usr/bin/xterm
+fi
+EOF
+
+chown amt:amt /home/amt/.vnc/xstartup
+chmod +x /home/amt/.vnc/xstartup
 
 # Start TigerVNC server on display :1
 su - amt -c "vncserver :1 -geometry 1920x1080 -depth 24 -localhost no"
