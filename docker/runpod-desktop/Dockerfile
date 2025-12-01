@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     novnc \
     websockify \
     tigervnc-standalone-server \
+    tigervnc-tools \
     --no-install-recommends
 
 # Install Google Chrome

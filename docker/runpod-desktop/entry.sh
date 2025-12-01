@@ -7,8 +7,9 @@ adduser amt sudo
 
 # Configure VNC to start XFCE for the user
 su - amt -c "mkdir -p ~/.vnc"
+su - amt -c "printf '%s\n%s\nn\n' \"$DESKTOP_PASS\" \"$DESKTOP_PASS\" | vncpasswd"
 su - amt -c "echo '#!/bin/sh
-xrdb $HOME/.Xresources
+xrdb \$HOME/.Xresources
 startxfce4 &' > ~/.vnc/xstartup"
 su - amt -c "chmod +x ~/.vnc/xstartup"
 
