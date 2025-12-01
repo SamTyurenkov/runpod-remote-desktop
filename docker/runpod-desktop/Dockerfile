@@ -40,11 +40,6 @@ RUN sed -i 's/^test.*$/startxfce4/' /etc/xrdp/startwm.sh
 # Allow any user to start the X server
 RUN echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
 
-# Create a non-root user for remote desktop access
-RUN adduser --disabled-password --gecos "" amt && \
-    echo "amt:hello2026" | chpasswd && \
-    adduser amt sudo
-
 # Expose RDP port
 EXPOSE 3389
 
