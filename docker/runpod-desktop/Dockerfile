@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install necessary packages
 RUN apt-get update && apt-get install -y \
-    xfce4 \
-    xfce4-goodies \
+    cinnamon \
+    cinnamon-core \
     sudo \
     wget \
     curl \

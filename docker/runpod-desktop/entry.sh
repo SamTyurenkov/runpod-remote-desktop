@@ -41,8 +41,8 @@ cat >/home/amt/.vnc/xstartup << 'EOF'
 #!/bin/sh
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
-if [ -x /usr/bin/startxfce4 ]; then
-  exec /usr/bin/startxfce4
+if [ -x /usr/bin/cinnamon-session ]; then
+  exec /usr/bin/cinnamon-session
 else
   exec /usr/bin/xterm
 fi
