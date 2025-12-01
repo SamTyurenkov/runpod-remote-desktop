@@ -5,6 +5,34 @@ adduser --disabled-password --gecos "" amt && \
 echo "amt:$DESKTOP_PASS" | chpasswd && \
 adduser amt sudo
 
+# Add desktop shortcuts for Google Chrome and Telegram
+mkdir -p /home/amt/Desktop
+
+cat >/home/amt/Desktop/chrome.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Google Chrome
+Exec=google-chrome
+Terminal=false
+Icon=google-chrome
+Categories=Network;WebBrowser;
+EOF
+
+cat >/home/amt/Desktop/telegram.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Telegram
+Exec=telegram
+Terminal=false
+Icon=telegram
+Categories=Network;InstantMessaging;
+EOF
+
+chown amt:amt /home/amt/Desktop/*.desktop
+chmod +x /home/amt/Desktop/*.desktop
+
 # Configure VNC to start XFCE for the user
 su - amt -c "mkdir -p ~/.vnc"
 su - amt -c "printf '%s\n%s\nn\n' \"$DESKTOP_PASS\" \"$DESKTOP_PASS\" | vncpasswd"
