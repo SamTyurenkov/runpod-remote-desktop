@@ -25,6 +25,7 @@ RUN adduser --disabled-password --gecos "" amt
 EXPOSE 14500
 EXPOSE 14501
 
+
 ADD entry.sh /usr/local/bin/entrypoint.sh
 WORKDIR /
 RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
