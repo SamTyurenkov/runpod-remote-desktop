@@ -5,7 +5,7 @@ FROM debian:bookworm-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install necessary packages
-RUN apt-get update && apt-get install -y xpra xvfb x11-xserver-utils fluxbox
+RUN apt-get update && apt-get install -y xpra xvfb x11-xserver-utils fluxbox wget
 
 # Install Google Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
