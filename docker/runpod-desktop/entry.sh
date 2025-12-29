@@ -11,5 +11,5 @@ chown amt:amt /home/amt/Desktop/*.desktop
 chmod +x /home/amt/Desktop/*.desktop
 
 xpra start :100 --start=google-chrome --bind-tcp=0.0.0.0:14500 --html=on &
-xpra start :100 --start=telegram-desktop --bind-tcp=0.0.0.0:14501 --html=on &
+xpra start :101 --start=telegram-desktop --bind-tcp=0.0.0.0:14501 --html=on &
 tail -f /dev/null
